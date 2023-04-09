@@ -24,7 +24,7 @@ class SettingsRepository @Inject constructor(
     private val prefKeyDefaultHost = stringPreferencesKey("default_host")
 
     override val isV2Enabled: Flow<Boolean> =
-        context.dataStore.data.map { prefs -> prefs[prefKeyIsV2Enabled] ?: false }
+        context.dataStore.data.map { prefs -> prefs[prefKeyIsV2Enabled] ?: true }
     override val defaultHost: Flow<String> =
         context.dataStore.data.map { prefs -> prefs[prefKeyDefaultHost] ?: DEFAULT_HOST }
 
