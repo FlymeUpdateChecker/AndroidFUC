@@ -38,10 +38,12 @@ private fun MainNav(
         composable(
             route = Screen.Devices.route
         ) {
+            var isHead by remember { mutableStateOf(false) }
+            LaunchedEffect(Unit) {
+                isHead = navController.previousBackStackEntry != null
+            }
             DevicesScreen(
-                goBack = if (navController.backQueue.size != 1) {
-                    { navController.popBackStack() }
-                } else null,
+                goBack = if (isHead) { { navController.popBackStack() } } else null,
                 addDevice = { navController.navigate(route = Screen.Create.route) },
                 openSettings = { navController.navigate(route = Screen.Settings.route) }
             )
