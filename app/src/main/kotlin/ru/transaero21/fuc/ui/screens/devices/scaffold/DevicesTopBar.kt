@@ -11,22 +11,16 @@ import ru.transaero21.fuc.R
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun DevicesTopBar(
-    goBack: (() -> Unit)?,
-    openSettings: () -> Unit
+    openSettings: () -> Unit,
+    scrollBehavior: TopAppBarScrollBehavior
 ) {
     TopAppBar(
-        title = { Text(text = stringResource(R.string.devices_saved_devices)) },
-        navigationIcon = {
-            goBack?.let {
-                IconButton(onClick = goBack) {
-                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
-                }
-            }
-        },
+        title = { Text(text = stringResource(R.string.devices_title)) },
         actions = {
             IconButton(onClick = openSettings) {
                 Icon(imageVector = Icons.Default.Settings, contentDescription = null)
             }
-        }
+        },
+        scrollBehavior = scrollBehavior
     )
 }

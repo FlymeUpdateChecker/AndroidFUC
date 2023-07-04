@@ -1,10 +1,31 @@
 <resources>
+    <!-- Default -->
     <string name="app_name">FUC</string>
 
     <!-- Devices -->
+    <string name="devices_title">Saved devices</string>
     <string name="devices_add_device">Add device</string>
-    <string name="devices_saved_devices">Saved devices</string>
+    <string name="devices_menu_rename">Rename</string>
+    <string name="devices_menu_delete">Delete</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>
+
+    <!-- Create -->
+    <string name="create_title">Add device</string>
+    <string name="create_save_button">Save</string>
+
+    <!-- Device -->
+    <string name="device_check_button">Check</string>
+
+    <!-- Common -->
+    <!-- Text -->
+    <string name="text_codename_title">Codename</string>
+    <string name="text_serial_title">Serial</string>
+    <string name="text_imei_title">IMEI</string>
+    <string name="text_android_title">Android</string>
+    <string name="text_type_title">Type</string>
+    <string name="text_host_title">Host</string>
+    <string name="text_timestamp_title">Timestamp</string>
+
 </resources>

@@ -1,7 +1,7 @@
 package ru.transaero21.fuc.enitity.model
 
 import org.junit.Test
-import ru.transaero21.fuc.entity.defaults.Android
+import ru.transaero21.fuc.entity.enums.Android
 
 class AndroidTest {
     @Test

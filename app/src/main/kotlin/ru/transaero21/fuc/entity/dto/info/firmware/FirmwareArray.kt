@@ -6,6 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class FirmwareArray(
     @SerialName("new") val new: FirmwareInfo?,
-    @SerialName("plan") val plan: FirmwareInfo?,
     @SerialName("cur") val cur: FirmwareInfo?,
 )

@@ -11,10 +11,10 @@ import ru.transaero21.fuc.R
 
 @Composable
 fun DevicesFAB(
-    addDevice: () -> Unit
+    openCreate: () -> Unit
 ) {
     ExtendedFloatingActionButton(
-        onClick = addDevice,
+        onClick = openCreate,
         icon = { Icon(imageVector = Icons.Default.Add, contentDescription = null) },
         text = { Text(text = stringResource(id = R.string.devices_add_device)) }
     )

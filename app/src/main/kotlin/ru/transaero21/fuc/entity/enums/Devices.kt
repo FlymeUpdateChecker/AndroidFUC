@@ -1,4 +1,4 @@
-package ru.transaero21.fuc.entity.defaults
+package ru.transaero21.fuc.entity.enums
 
 enum class Devices(val device: String, val codename: String) {
     Meizu16X(device = "Meizu 16X", codename = "M8720"),

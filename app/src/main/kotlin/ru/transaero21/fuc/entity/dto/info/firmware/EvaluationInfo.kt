@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class EvaluationInfo(
     @SerialName("evalProjectId") val evalProjectId: Int?,
-    @SerialName("averageScore") val averageScore: Int?,
+    @SerialName("averageScore") val averageScore: Float?,
     @SerialName("existEvalProject") val existEvalProject: Boolean?,
     @SerialName("totalCounts") val totalCounts: Int?,
     @SerialName("showEvalCounts") val showEvalCounts: Int?

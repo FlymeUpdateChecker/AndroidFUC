@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -14,7 +15,7 @@ import ru.transaero21.fuc.remote.DEFAULT_HOST
 import javax.inject.Inject
 
 class SettingsRepository @Inject constructor(
-    private val context: Context
+    @ApplicationContext private val context: Context
 ) : ISettingsRepository {
     private val Context.dataStore by preferencesDataStore(
         name = context.packageName + "_preferences",

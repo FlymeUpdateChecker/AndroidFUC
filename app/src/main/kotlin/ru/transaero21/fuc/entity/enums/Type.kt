@@ -1,4 +1,4 @@
-package ru.transaero21.fuc.entity.defaults
+package ru.transaero21.fuc.entity.enums
 
 enum class Type(val type: String) {
     Stable("stable"),
