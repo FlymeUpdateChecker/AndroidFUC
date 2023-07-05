@@ -20,7 +20,8 @@ data class SmallDeviceState(
 
 // TODO: Bring ALL models here
 private fun getImageUrl(codename: String): String {
-    val number = when(codename) {
+    val number = when(codename.uppercase()) {
+        "M3920" -> 197
         "M3910" -> 196
         "M3810" -> 195
         "M2110" -> 194
@@ -42,8 +43,8 @@ private fun getImageUrl(codename: String): String {
         "M8160" -> 178
         "M8130" -> 177
         "M8720", "M8725" -> 176
-        "M8920", "16thPlus" -> 175
-        "M8820", "M8825", "16th" -> 174
+        "M8920", "16THPLUS" -> 175
+        "M8820", "M8825", "16TH" -> 174
         else -> null
     }
     return number?.let { "https://www-res.flyme.cn/resources/flymeos/upload/phonebase/phone_image_$it.png" } ?: ""
