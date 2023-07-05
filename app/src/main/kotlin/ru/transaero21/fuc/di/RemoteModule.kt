@@ -9,11 +9,13 @@ import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.okhttp.OkHttp
 import ru.transaero21.fuc.remote.IMzApi
 import ru.transaero21.fuc.remote.MzApi
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object RemoteModule {
     @Provides
+    @Singleton
     fun provideEngine(): HttpClientEngine {
         return OkHttp.create()
     }
@@ -22,6 +24,7 @@ object RemoteModule {
     @InstallIn(SingletonComponent::class)
     interface IRemoteModule {
         @Binds
+        @Singleton
         fun provideIMzApi(repository: MzApi): IMzApi
     }
 }
