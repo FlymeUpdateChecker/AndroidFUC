@@ -2,6 +2,16 @@
     <!-- Default -->
     <string name="app_name">FUC</string>
 
+    <!-- Common -->
+    <!-- Text -->
+    <string name="text_codename_title">Codename</string>
+    <string name="text_serial_title">Serial</string>
+    <string name="text_imei_title">IMEI</string>
+    <string name="text_android_title">Android</string>
+    <string name="text_type_title">Type</string>
+    <string name="text_host_title">Host</string>
+    <string name="text_timestamp_title">Timestamp</string>
+
     <!-- Devices -->
     <string name="devices_title">Saved devices</string>
     <string name="devices_add_device">Add device</string>
@@ -18,14 +28,14 @@
     <!-- Device -->
     <string name="device_check_button">Check</string>
 
-    <!-- Common -->
-    <!-- Text -->
-    <string name="text_codename_title">Codename</string>
-    <string name="text_serial_title">Serial</string>
-    <string name="text_imei_title">IMEI</string>
-    <string name="text_android_title">Android</string>
-    <string name="text_type_title">Type</string>
-    <string name="text_host_title">Host</string>
-    <string name="text_timestamp_title">Timestamp</string>
+    <!-- Check -->
+    <string name="check_share_text">Found new %1$s! Check this out: %2$s</string>
+
+    <!-- Changelog -->
+    <string name="changelog_title">Changelog</string>
+    <string name="changelog_copy_button">Copy</string>
+
+    <!-- Utils -->
+    <string name="utils_on_copied">Copied!</string>
 
 </resources>

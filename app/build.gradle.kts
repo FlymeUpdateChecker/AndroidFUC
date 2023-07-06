@@ -150,6 +150,9 @@ dependencies {
     // Others
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.hamcrest:hamcrest:2.2")
+    implementation("org.jsoup:jsoup:1.16.1")
+    implementation("net.sourceforge.cssparser:cssparser:0.9.30")
+    implementation("org.w3c:dom:2.3.0-jaxb-1.0.6")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }

@@ -25,6 +25,8 @@ import ru.transaero21.fuc.entity.dto.input.v2.SysV2Input
 import javax.inject.Inject
 import kotlin.reflect.full.memberProperties
 
+private const val TAG = "MzApi"
+
 class MzApi @Inject constructor(
     engine: HttpClientEngine
 ) : IMzApi {
@@ -40,10 +42,10 @@ class MzApi @Inject constructor(
         install(Logging) {
             logger = object: Logger {
                 override fun log(message: String) {
-                    Log.e("FUC", message)
+                    Log.d(TAG, message)
                 }
             }
-            level = LogLevel.ALL
+            level = LogLevel.INFO
         }
     }
 
@@ -65,15 +67,12 @@ class MzApi @Inject constructor(
                 url { appendParam(sys) }
             }.toMzInfo()
         } catch (ex: Exception) {
-            Log.e("FUC", ex.message ?: "")
             null
         }
     }
 
-    @OptIn(InternalAPI::class)
     private suspend fun HttpResponse.toMzInfo(): MzInfo {
         return try {
-            Log.e("FUC", this.content.toString())
             body<SuccessInfo>()
         } catch (ex: Exception) {
             body<ErrorInfo>()

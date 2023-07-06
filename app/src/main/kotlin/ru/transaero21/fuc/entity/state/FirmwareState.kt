@@ -1,5 +1,6 @@
 package ru.transaero21.fuc.entity.state
 
+import org.jsoup.Jsoup
 import ru.transaero21.fuc.entity.dto.info.firmware.FirmwareInfo
 
 data class FirmwareState(
@@ -8,7 +9,6 @@ data class FirmwareState(
     val android: String = "",
     val packageSize: String = "",
     val changeLog: String = "",
-    val changeLogStyle: String = "",
     val packageUrl: String = ""
 ) {
     constructor(info: FirmwareInfo) : this(
@@ -16,8 +16,16 @@ data class FirmwareState(
         releaseTime = info.releaseDate ?: "",
         android = info.latestVersion?.split("-")?.get(0) ?: "",
         packageSize = info.fileSize ?: "",
-        changeLog = info.releaseNote ?: "",
-        changeLogStyle = info.releaseNoteStyle ?: "",
+        changeLog = buildChangeLog(info.releaseNoteStyle ?: "", info.releaseNote ?: ""),
         packageUrl = info.updateUrl ?: ""
     )
+}
+
+fun buildChangeLog(releaseNoteStyle: String, releaseNote: String): String {
+    val html = "<html><head>$releaseNoteStyle</head><body>$releaseNote</body></html>"
+    val doc = Jsoup.parse(html)
+    for (el in doc.body().children().select("*")) {
+        el.removeAttr("style")
+    }
+    return doc.html()
 }

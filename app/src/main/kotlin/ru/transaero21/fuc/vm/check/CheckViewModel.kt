@@ -1,5 +1,6 @@
 package ru.transaero21.fuc.vm.check
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,6 +15,8 @@ import ru.transaero21.fuc.entity.enums.RequestStatus
 import ru.transaero21.fuc.entity.model.DeviceData
 import ru.transaero21.fuc.entity.state.FirmwareState
 import javax.inject.Inject
+
+private const val TAG = "CheckViewModel"
 
 @HiltViewModel
 class CheckViewModel @Inject constructor(
@@ -39,16 +42,25 @@ class CheckViewModel @Inject constructor(
         }
     }
 
+    override fun cancelCheck() {
+        viewModelScope.launch { checkRepo.cancelCheck() }
+    }
+
     private fun callback(info: SuccessInfo?, status: RequestStatus) {
-        setStatus(status)
         if (status == RequestStatus.FOUND_NEW) {
-            if (info?.reply?.value?.new != null) {
-                _firmware.value = FirmwareState(info.reply.value.new)
-            } else setStatus(RequestStatus.FAILURE)
+            info?.reply?.value?.new?.let { new ->
+                _firmware.value = FirmwareState(new)
+            }
+        } else if (status == RequestStatus.NOTHING_NEW) {
+            info?.reply?.value?.cur?.let { cur ->
+                _firmware.value = FirmwareState(cur)
+            } ?: _firmware.update { _firmware.value.copy(changeLog = "") }
         }
+        setStatus(status)
     }
 
     private fun setStatus(status: RequestStatus) {
+        Log.d(TAG, "setStatus: called with: status=$status.")
         _status.update { status }
     }
 }

@@ -6,4 +6,5 @@ import ru.transaero21.fuc.entity.model.DeviceData
 
 interface ICheckRepository {
     suspend fun checkSys(data: DeviceData, isV2: Boolean, callback: (SuccessInfo?, RequestStatus) -> Unit)
+    suspend fun cancelCheck()
 }

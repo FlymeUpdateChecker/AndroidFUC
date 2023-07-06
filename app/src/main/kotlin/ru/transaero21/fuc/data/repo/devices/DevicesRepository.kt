@@ -1,5 +1,6 @@
 package ru.transaero21.fuc.data.repo.devices
 
+import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,6 +11,8 @@ import ru.transaero21.fuc.data.db.dao.DeviceDataDao
 import ru.transaero21.fuc.entity.model.DeviceData
 import javax.inject.Inject
 
+private const val TAG = "DevicesRepository"
+
 class DevicesRepository @Inject constructor(
     private val deviceDataDao: DeviceDataDao
 ): IDevicesRepository {
@@ -19,6 +22,7 @@ class DevicesRepository @Inject constructor(
     private val scope = CoroutineScope(Dispatchers.IO)
 
     init {
+        Log.d(TAG, "Initialize")
         scope.launch {
             deviceDataDao.getAll().collect { _devicesList.emit(it) }
         }

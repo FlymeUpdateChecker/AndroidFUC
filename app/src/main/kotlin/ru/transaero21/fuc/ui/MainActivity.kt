@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.navigationBars
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -18,6 +20,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.transaero21.fuc.ui.screens.Screen
+import ru.transaero21.fuc.ui.screens.changelog.ChangeLog
 import ru.transaero21.fuc.ui.screens.check.Check
 import ru.transaero21.fuc.ui.screens.create.Create
 import ru.transaero21.fuc.ui.screens.device.Device
@@ -60,6 +63,9 @@ class MainActivity : ComponentActivity() {
                 MainNav(navController)
             }
         }
+        val view = LocalView.current
+        val darkTheme = isSystemInDarkTheme()
+        WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
     }
 
     @Composable
@@ -77,10 +83,10 @@ class MainActivity : ComponentActivity() {
                 )
             }
             composable(route = Screen.Settings.route) {
-                Settings(settingsVM = settingsVM, goBack = { navController.popBackStack() })
+                Settings(settingsVM = settingsVM, goBack = navController::popBackStack)
             }
             composable(route = Screen.Create.route) {
-                Create(createVM = createVM, goBack = { navController.popBackStack() })
+                Create(createVM = createVM, goBack = navController::popBackStack )
             }
             composable(route = Screen.Device.route) {
                 Device(
@@ -89,11 +95,24 @@ class MainActivity : ComponentActivity() {
                         checkVM.requestCheck(it)
                         navController.navigate(route = Screen.Check.route)
                     },
-                    goBack = { navController.popBackStack() }
+                    goBack = navController::popBackStack
                 )
             }
             composable(route = Screen.Check.route) {
-                Check(checkVM = checkVM, goBack = { navController.popBackStack() })
+                Check(
+                    checkVM = checkVM,
+                    viewChangeLog = { navController.navigate(route = Screen.ChangeLog.route) },
+                    goBack = {
+                        navController.popBackStack()
+                        checkVM.cancelCheck()
+                    }
+                )
+            }
+            composable(route = Screen.ChangeLog.route) {
+                ChangeLog(
+                    checkVM = checkVM,
+                    goBack = navController::popBackStack
+                )
             }
         }
     }

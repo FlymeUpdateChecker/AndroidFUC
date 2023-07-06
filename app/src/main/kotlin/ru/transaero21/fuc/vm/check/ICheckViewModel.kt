@@ -10,4 +10,5 @@ interface ICheckViewModel {
     val firmware: StateFlow<FirmwareState>
 
     fun requestCheck(deviceData: DeviceData)
+    fun cancelCheck()
 }
